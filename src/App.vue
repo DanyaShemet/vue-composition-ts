@@ -1,27 +1,46 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <div class="modal" :style="style">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+      <div id="modal"></div>
+    </div>
+    <button class="modal-close is-large" @click="hide"></button>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <Navbar />
+      <router-view />
+    </div>
+  </section>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+import { computed, defineComponent } from "vue";
+import Navbar from "@/components/NavBar.vue";
+import { useModal } from "@/useModal";
 
 export default defineComponent({
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+  name: "App",
+  components: { Navbar },
+
+  setup() {
+    const modal = useModal();
+    const style = computed(() => {
+      return {
+        display: modal.show.value ? "block" : "none",
+      };
+    });
+    const hide = () => {
+      modal.hideModal();
+    };
+    return { style, hide };
+  },
 });
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
   margin-top: 60px;
 }
 </style>
