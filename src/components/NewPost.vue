@@ -23,8 +23,11 @@ export default defineComponent({
     const store = useStore();
     const router = useRouter();
     const save = async (post: Post) => {
+      console.log("1");
       await store.createPost(post);
+      console.log(2);
       router.push("/");
+      console.log(3);
     };
 
     return {

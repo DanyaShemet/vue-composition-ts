@@ -3,6 +3,8 @@ import PostWriter from "@/components/PostWriter.vue";
 
 describe("PostWriter", () => {
   it("emits a save event with new post", async (done) => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     const wrapper = mount(PostWriter, {
       props: {
         post: {
