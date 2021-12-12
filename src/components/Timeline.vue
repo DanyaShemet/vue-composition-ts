@@ -1,4 +1,9 @@
 <template>
+  <div class="message is-primary is-marginless">
+    <div class="message-header">
+      <div>Posts for {{ currentPeriod.toLowerCase() }}</div>
+    </div>
+  </div>
   <nav class="is-primary panel">
     <span class="panel-tabs">
       <a
@@ -47,7 +52,6 @@ export default defineComponent({
       }
       return acc.concat(thePost);
     }, []);
-    console.log(allPosts, store.getState().posts.all);
     const posts = computed(() => {
       return allPosts.filter((post) => {
         if (currentPeriod.value === "Today") {

@@ -57,7 +57,8 @@ export default defineComponent({
 
   setup(props, ctx) {
     const title = ref(props.post.title);
-    const content = ref("## Title\nEnter");
+    // const content = ref("## Title\nEnter");
+    const content = ref(props.post.markdown || "");
     const html = ref("");
 
     const parseHtml = (str: string) => {

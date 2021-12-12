@@ -1,12 +1,15 @@
 <template>
-  <a class="is-align-items-flex-start is-flex is-flex-direction-column">
+  <router-link
+    :to="to"
+    class="is-align-items-flex-start is-flex is-flex-direction-column"
+  >
     <span>
       {{ post.title }}
     </span>
     <div>
       {{ post.created.format("Do MMM") }}
     </div>
-  </a>
+  </router-link>
 </template>
 
 <script lang="ts">
@@ -19,6 +22,12 @@ export default defineComponent({
       type: Object as () => Post,
       required: true,
     },
+  },
+
+  setup(props) {
+    return {
+      to: `/posts/${props.post.id}`,
+    };
   },
 });
 </script>

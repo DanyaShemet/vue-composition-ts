@@ -1,0 +1,44 @@
+<template>
+  <PostWriter :post="post" @save="save" />
+</template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import PostWriter from "@/components/PostWriter.vue";
+import { useStore } from "@/store";
+import { Post } from "@/mocks";
+
+export default defineComponent({
+  components: { PostWriter },
+  async setup() {
+    const store = useStore();
+    const router = useRouter();
+    const id = useRoute().params.id as string;
+    if (!store.getState().posts.loaded) {
+      await store.fetchPost();
+    }
+
+    const post = store.getState().posts.all.get(id);
+
+    if (!post) {
+      throw Error("Post was not found");
+    }
+
+    if (post.authorId !== store.getState().authors.currentUserId) {
+      router.push("/");
+    }
+
+    const save = async (post: Post) => {
+      await store.updatePost(post);
+      router.push("/");
+    };
+    return {
+      post,
+      save,
+    };
+  },
+});
+</script>
+
+<style scoped></style>

@@ -1,4 +1,4 @@
-import { mount, flushPromises } from "@vue/test-utils";
+import { mount, flushPromises, RouterLinkStub } from "@vue/test-utils";
 import Timeline from "@/components/Timeline.vue";
 import { today, thisWeek, thisMonth } from "@/mocks.ts";
 import { Store } from "@/store";
@@ -19,6 +19,12 @@ function mountTimeLine() {
       all: new Map(),
       loaded: false,
     },
+    authors: {
+      ids: [],
+      all: new Map(),
+      loaded: false,
+      currentUserId: undefined,
+    },
   });
   const testComp = {
     components: { Timeline },
@@ -31,6 +37,7 @@ function mountTimeLine() {
   };
   return mount(testComp, {
     global: {
+      components: { RouterLink: RouterLinkStub },
       plugins: [store],
     },
   });

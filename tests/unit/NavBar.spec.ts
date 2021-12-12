@@ -2,6 +2,7 @@ import { mount } from "@vue/test-utils";
 import NavBar from "@/components/NavBar.vue";
 import SignUp from "@/components/SignUp.vue";
 import { Store } from "@/store";
+import { wrap } from "lodash";
 
 describe("NavBar", () => {
   const store = new Store({
@@ -9,6 +10,12 @@ describe("NavBar", () => {
       ids: [],
       all: new Map(),
       loaded: false,
+    },
+    authors: {
+      ids: [],
+      all: new Map(),
+      loaded: false,
+      currentUserId: undefined,
     },
   });
 
@@ -29,8 +36,8 @@ describe("NavBar", () => {
       },
     });
 
+    await wrapper.get('[data-test="sign-up"]').trigger("click");
     const form = wrapper.getComponent(SignUp);
-    console.log(form);
 
     expect(document.body.outerHTML).toContain(
       "The value must be between 10 and 40"

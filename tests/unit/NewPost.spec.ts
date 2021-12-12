@@ -31,6 +31,20 @@ describe("NewPost", () => {
       all: new Map(),
       loaded: false,
     },
+    authors: {
+      ids: ["100"],
+      all: new Map([
+        [
+          "100",
+          {
+            username: "username",
+            id: "100",
+          },
+        ],
+      ]),
+      loaded: true,
+      currentUserId: "100",
+    },
   });
 
   beforeEach(() => {
