@@ -9,9 +9,7 @@ import EditPost from "@/components/EditPost.vue";
 export function routerWithStore(store: Store) {
   const router = createRouter({
     history: createWebHistory(
-      process.env.NODE_ENV === "production"
-        ? "/vuejs-composition-api"
-        : undefined
+      process.env.NODE_ENV === "production" ? "/vue-composition-ts" : undefined
     ),
     routes: [
       {
